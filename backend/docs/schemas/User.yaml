@@ -1,0 +1,35 @@
+type: object
+required:
+  - id
+  - email
+properties:
+  id:
+    type: integer
+    description: User ID
+  email:
+    type: string
+    description: Email address of user
+  first_name:
+    type: string
+    description: First name of user
+  last_name:
+    type: string
+    description: Last name of user
+  password:
+    type: string
+    description: Hash generated from this user's password
+  token:
+    type: string
+    description: # //
+  reset_token:
+    type: string
+    description: # //
+  created_at:
+    type: string
+    description: Date user was added to the database
+  updated_at:
+    type: string
+    description: Date user was last updated
+  permission_level:
+    type: integer
+    description: # //

@@ -1,0 +1,64 @@
+post:
+  summary: Log in to the user service
+  operationId: post_login
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              description: Email address of user logging in
+            password:
+              type: string
+              description: Password for this user
+  security:
+    - BearerAuth: []
+  tags:
+    - auth
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: JSON web token
+              user:
+                $ref: "../schemas/UserPublic.yaml"
+    "400":
+      description: Bad Request
+    "401":
+      description: Unauthorized
+    "422":
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          examples:
+            Email required:
+              value:
+                error: "The Email field is required."
+            Password required:
+              value:
+                error: "The Password field is required."
+            Invalid email:
+              value:
+                error: "The Email field must be a valid email."
+            Password must match:
+              value:
+                error: "Password does not match our records."
+      "500":
+        description: Internal Server Error

@@ -1,0 +1,17 @@
+# Database
+DB_HOST: users_db
+DB_PORT: 3306
+DB_DATABASE: users
+DB_USERNAME: root
+DB_PASSWORD: local_mysql_password
+DB_TIMEZONE: UTC
+
+SERVER_PORT: ":8080"
+
+CF_CERT_URL: bypass
+CF_AUD: bypass
+
+ACCOUNT_URL: http://docker.for.mac.localhost:50018/api/v1
+
+REDIS_HOST: users_redis
+REDIS_PORT: 6379

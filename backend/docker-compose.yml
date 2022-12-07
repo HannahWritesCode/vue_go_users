@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  # Nginx
+  web:
+    container_name: users_web
+    build:
+      context: ./
+      dockerfile: .docker/nginx/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - '50009:80'
+    links:
+      - go
+
+  # Database
+  db:
+    container_name: users_db
+    image: mysql:5.7.24
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '51009:3306'
+    volumes:
+      - ~/data/users_mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: local_mysql_password
+    entrypoint: sh -c " echo 'CREATE DATABASE IF NOT EXISTS users; CREATE DATABASE IF NOT EXISTS test_users;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
+
+  # Go
+  go:
+    container_name: users_go
+    build:
+      context: .
+      dockerfile: .docker/go/Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    links:
+      - db
+      - redis
+    command: [ "go", "run", "./main.go", "-e", "docker_development" ]
+
+  # Redis
+  redis:
+    image: redis:3.2.12
+    container_name: users_redis

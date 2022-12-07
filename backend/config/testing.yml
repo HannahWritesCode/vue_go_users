@@ -1,0 +1,15 @@
+# Database
+DB_HOST: users_db
+DB_PORT: 3306
+DB_DATABASE: test_users
+DB_USERNAME: root
+DB_PASSWORD: local_mysql_password
+DB_TIMEZONE: UTC
+
+SERVER_PORT: ":8080"
+
+CF_CERT_URL: bypass
+CF_AUD: bypass
+
+REDIS_HOST: users_redis
+REDIS_PORT: 6379

@@ -1,0 +1,28 @@
+openapi: "3.0.1"
+info:
+  version: 1.0.0
+  title: Users API
+#   description:
+# servers:
+#   - url:
+#     description: Production server
+paths:
+  /users:
+    $ref: "./paths/users.yaml"
+  /auth:
+    $ref: "./paths/auth.yaml"
+  /reset-password:
+    $ref: "./paths/reset-password.yaml"
+  /request-password:
+    $ref: "./paths/request-password.yaml"
+components:
+  schemas:
+    User:
+      $ref: "./schemas/User.yaml"
+    UserPublic:
+      $ref: "./schemas/UserPublic.yaml"
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
