@@ -39,14 +39,14 @@
             </div>
 
             <input class="bg-green-500 hover:bg-green-700 text-white font-bold my-2 py-2 px-4 rounded" type="submit"
-                value="Submit" id="submit-button" />
+                value="Update my Account" id="submit-button" />
         </form>
 
-        <div v-if="response == 200" class="confirmation-message">
+        <div v-if="response == 200">
             <p>Your account has been updated!</p>
         </div>
 
-        <div v-else-if="response" class="error-message">
+        <div v-else-if="response">
             <p>Error updating your account.</p>
         </div>
 

@@ -39,7 +39,7 @@
             </div>
 
             <input class="bg-green-500 hover:bg-green-700 text-white font-bold my-2 py-2 px-4 rounded" type="submit"
-                value="Submit" id="submit-button" />
+                value="Create Account" id="submit-button" />
         </form>
 
         <div v-if="error" class="error-message">

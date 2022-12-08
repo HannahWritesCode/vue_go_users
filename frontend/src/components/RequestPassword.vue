@@ -13,14 +13,14 @@
             </div>
 
             <input class="bg-green-500 hover:bg-green-700 text-white font-bold my-2 py-2 px-4 rounded" type="submit"
-                value="Submit" id="submit-button" />
+                value="Email me a reset link" id="submit-button" />
         </form>
 
-        <div v-if="email">
+        <div v-if="response == 200">
             <p>Check the email you submitted for a link to reset your password.</p>
         </div>
 
-        <div v-else-if="error" class="error-message">
+        <div v-else-if="response">
             <p>Error requesting password reset.</p>
         </div>
 
@@ -41,7 +41,7 @@ export default {
     data: function () {
         return {
             email: "",
-            error: ""
+            response: ""
         }
     },
     methods: {
@@ -57,10 +57,10 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response)
+                    this.response = response.status;
                 })
                 .catch(error => {
-                    this.error = error.response.status
+                    this.response = error.response.status
                 })
         }
     }
