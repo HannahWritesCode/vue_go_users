@@ -3,6 +3,7 @@ import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
 import UpdateAccount from './components/UpdateAccount.vue'
 import ResetPassword from './components/ResetPassword.vue'
+import RequestPassword from './components/RequestPassword.vue'
 import Success from './components/Success.vue'
 
 const routes = [
@@ -27,9 +28,13 @@ const routes = [
         component: UpdateAccount,
     },
     {
-        path: "/reset-password",
-        component: ResetPassword,
+        path: "/request-password",
+        component: RequestPassword,
     },
+    {
+        path: "/reset-password/:reset_token",
+        component: ResetPassword
+    }
 ];
 
 const router = createRouter({

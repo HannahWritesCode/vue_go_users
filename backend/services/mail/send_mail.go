@@ -1,31 +1,43 @@
 package mail
 
 import (
+	"fmt"
 	"net/smtp"
 	"os"
 )
 
-func SendResetEmail(receiver string) error {
-	// Sender data.
+func SendResetEmail(receiver string, reset_token string) error {
+	// Sender data
 	from := os.Getenv("SENDER_EMAIL")
-	password := os.Getenv("SENDER_PASSWORD")
+	password := os.Getenv("APP_PASSWORD")
 
-	// Receiver email address.
+	// Receiver email address
 	to := []string{
 		receiver,
 	}
 
-	// smtp server configuration.
+	// smtp server configuration
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
 
-	// Message.
-	message := []byte("This is a test email message.")
+	// Subject and body
+	subject := "Reset Your Password"
+	body := fmt.Sprintf("Reset your password here: http://localhost:5173/reset-password/%s", reset_token)
 
-	// Authentication.
+	// Message
+	//message := fmt.Sprintf("Reset your password here: http://localhost:5173/request-password/%s", reset_token)
+	//byteMessage := []byte(message)
+
+	// Build the message
+	message := fmt.Sprintf("From: %s\r\n", from)
+	message += fmt.Sprintf("To: %s\r\n", to)
+	message += fmt.Sprintf("Subject: %s\r\n", subject)
+	message += fmt.Sprintf("\r\n%s\r\n", body)
+
+	// Authentication
 	auth := smtp.PlainAuth("", from, password, smtpHost)
 
-	// Sending email.
-	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+	// Sending email
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, []byte(message))
 	return err
 }

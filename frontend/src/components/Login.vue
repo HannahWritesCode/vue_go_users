@@ -34,7 +34,7 @@
             <p>Create an account</p>
         </router-link>
 
-        <router-link to="/reset-password" class="font-semibold py-3 text-green-500 hover:underline">
+        <router-link to="/request-password" class="font-semibold py-3 text-green-500 hover:underline">
             <p>Forgot your password?</p>
         </router-link>
     </div>

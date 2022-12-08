@@ -67,7 +67,7 @@ func SendResetPasswordEmail(c *gin.Context) {
 	c.JSON(http.StatusOK, resetToken)
 
 	// Send password reset email
-	sendEmailErr := mail.SendResetEmail(input.Email)
+	sendEmailErr := mail.SendResetEmail(input.Email, resetToken)
 	if sendEmailErr != nil {
 		panic(sendEmailErr)
 	}

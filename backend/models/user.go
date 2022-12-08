@@ -106,6 +106,17 @@ func (User) GetByAuthToken(id uint, token string) (User, error) {
 	return user, query.Error
 }
 
+func (User) GetByResetToken(token string) (User, error) {
+	user := User{}
+
+	query := db.GetDB().Debug().
+		Model(&User{}).
+		Where("reset_token = ?", token).
+		First(&user)
+
+	return user, query.Error
+}
+
 func (user User) BuildJWT() (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, jwt.MapClaims{

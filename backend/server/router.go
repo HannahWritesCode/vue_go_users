@@ -46,14 +46,13 @@ func NewRouter() *gin.Engine {
 
 		authGroup := v1.Group("", middleware.Middleware())
 		{
-			authGroup.POST("/reset-password", auth.ResetPassword)
-
 			authGroup.GET("/users", users.Get)
 			authGroup.PUT("/users", users.Update)
 			authGroup.DELETE("/users", users.Delete)
 		}
 
 		v1.POST("/request-password", auth.SendResetPasswordEmail)
+		v1.POST("/reset-password", auth.ResetPassword)
 	}
 
 	return router
