@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="text-4xl">Reset Your Password</h1>
+    <div class="min-w-full">
+        <h1 class="text-4xl font-semibold">Reset Your Password</h1>
 
         <p class="py-3">Enter the email associated with your account, and we'll help you reset your password.</p>
 
@@ -17,11 +17,11 @@
         </form>
 
         <div v-if="response == 200">
-            <p>Check the email you submitted for a link to reset your password.</p>
+            <p class="font-bold py-3">Check the email you submitted for a link to reset your password.</p>
         </div>
 
         <div v-else-if="response">
-            <p>Error requesting password reset.</p>
+            <p class="font-bold py-3">Error requesting password reset.</p>
         </div>
 
         <div class="flex flex-row flex-nowrap">

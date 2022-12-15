@@ -1,24 +1,24 @@
 <template>
     <div>
         <div>
-            <div class="flex flex-row">
-                <p class="font-bold text-4xl text-green-500" v-text="`${first_name} ${last_name}`"></p>
-                <p class="text-4xl">, you've logged in!</p>
+            <div class="flex flex-row flex-wrap">
+                <h1 class="font-bold text-4xl text-green-500 pr-3" v-text="`${first_name} ${last_name},`"></h1>
+                <h1 class="text-4xl">you've logged in!</h1>
             </div>
-            <p>I'm so proud of you.</p>
-            <!-- add methods to determine how many accounts there are total, 
-        how many people have logged in that day, 
-        how many people in total have logged in? -->
+            <p class="py-3">I'm so proud of you.</p>
         </div>
 
         <router-link to="/update-account" class="font-semibold py-3 text-green-500 hover:underline">
-            <p>Update your account information</p>
+            <p>Update my account information</p>
         </router-link>
 
-        <!-- add delete account button -->
+        <router-link to="/delete-confirmation" class="font-semibold py-3 text-green-500 hover:underline">
+            <p>Delete my account</p>
+        </router-link>
 
         <div>
-            <button><a class="font-semibold py-3 text-green-500 hover:underline" @click="logout()">Log out</a></button>
+            <button><a class="font-semibold py-3 text-green-500 hover:underline" @click="logout()">Log
+                    out</a></button>
         </div>
     </div>
 </template>
@@ -63,7 +63,6 @@ export default {
                 })
                 .catch(error => {
                     this.error = error.response.status
-                    console.log(error)
                     console.log("8")
                     if (this.error == '400') {
                         console.log("9")

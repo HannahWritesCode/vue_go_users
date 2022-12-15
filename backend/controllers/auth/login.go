@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 
+	"vue-go-users.com/helpers"
 	"vue-go-users.com/models"
 	"vue-go-users.com/utils"
 
@@ -52,6 +53,11 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	userPublic, err := helpers.ConvertStruct[models.UserPublic](user)
+	if err != nil {
+		panic(err)
+	}
+
 	// build JWT
 	token, buildErr := user.BuildJWT()
 	if buildErr != nil {
@@ -60,7 +66,7 @@ func Login(c *gin.Context) {
 
 	output := gin.H{
 		"token": token,
-		"user":  user,
+		"user":  userPublic,
 	}
 
 	// return 200 and JWT

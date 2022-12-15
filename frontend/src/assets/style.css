@@ -4,42 +4,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  /* text-rendering: optimizelegibility; */
+  font-family:
+    "Segoe UI", "Helvetica", sans-serif;
+  letter-spacing: 0.025em;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
 #app {
-  /* min-width: 20%;
-  max-width: 75%; */
-  max-width: 40%;
-  min-width: 40%;
-  align-items: stretch;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 5rem 2rem;
   font-weight: normal;
+  max-width: 40rem;
+  width: 100%;
 }
-
-@media only screen and (min-device-width: 480px) {
-  #app {
-    min-width: 80%;
-  }
-}
-
-@media only screen and (min-device-width: 768px) {
-  #app {
-    min-width: 60%;
-  }
-}
-
-/* @media (max-width: 767px) {
-  #app {
-    min-width: 60%;
-  }
-} */
-
-/* #app a {
-  color: #22c55e;
-}
-
-#app a:hover {
-  text-decoration-color: #22c55e;
-  text-decoration: underline;
-} */

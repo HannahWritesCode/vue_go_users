@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="text-4xl">Sign Up</h1>
+    <div class="min-w-full">
+        <h1 class="text-4xl font-semibold">Sign Up</h1>
 
         <form @submit.stop.prevent="attemptSignup()">
             <div class="flex flex-col my-2">
@@ -21,7 +21,7 @@
                 <label for="signup-last_name">Last Name</label>
                 <input
                     class="border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 p-0.5"
-                    type="string" id="signup-first-name" v-model="last_name" required />
+                    type="string" id="signup-last-name" v-model="last_name" required />
             </div>
 
             <div class="flex flex-col my-2">
@@ -43,7 +43,7 @@
         </form>
 
         <div v-if="error" class="error-message">
-            <p>Error creating your account.</p>
+            <p class="font-bold py-3">Error creating your account.</p>
         </div>
 
         <div class="flex flex-row flex-wrap">

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="text-4xl">Update your account</h1>
+    <div class="min-w-full">
+        <h1 class="text-4xl font-semibold">Update your account</h1>
 
         <form @submit.stop.prevent="attemptUpdate()">
             <div class="flex flex-col my-2">
@@ -43,11 +43,13 @@
         </form>
 
         <div v-if="response == 200">
-            <p>Your account has been updated!</p>
+            <p class="font-bold py-3">Your account has been updated!</p>
         </div>
 
         <div v-else-if="response">
-            <p>Error updating your account.</p>
+            <p class="font-bold py-3">Error updating your account. <br /> If you are updating your password, confirm it
+                by
+                typing it again in the "Confirm your password" field.</p>
         </div>
 
         <router-link to="/success" class="font-semibold py-3 text-green-500 hover:underline">

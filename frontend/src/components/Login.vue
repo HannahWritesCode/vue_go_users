@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="min-w-full">
         <div id="login-form">
-            <h1 class="text-4xl">Welcome.</h1>
+            <h1 class="text-4xl font-semibold">Welcome.</h1>
 
             <form @submit.stop.prevent="attemptLogin(email, password)">
                 <div class="flex flex-col my-2">
@@ -25,8 +25,8 @@
             <!-- <hr /> -->
 
             <div v-if="error">
-                <p class="py-2">Match not found. <br />Check that your entered email and/or
-                    password are correct.</p>
+                <p class="font-bold py-3">Error logging in. <br />Check that the email and/or
+                    password you entered are correct.</p>
             </div>
         </div>
 
@@ -42,7 +42,6 @@
 
 <script>
 import axios from 'axios'
-//import auth from '../services/auth.js'
 
 let token = localStorage.getItem("token")
 

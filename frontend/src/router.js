@@ -5,6 +5,7 @@ import UpdateAccount from './components/UpdateAccount.vue'
 import ResetPassword from './components/ResetPassword.vue'
 import RequestPassword from './components/RequestPassword.vue'
 import Success from './components/Success.vue'
+import DeleteConfirmation from './components/DeleteConfirmation.vue'
 
 const routes = [
     {
@@ -34,6 +35,14 @@ const routes = [
     {
         path: "/reset-password/:reset_token",
         component: ResetPassword
+    },
+    {
+        path: "/delete-confirmation",
+        component: DeleteConfirmation
+    },
+    {
+        path: "/verification/:verification_token",
+        component: Verification
     }
 ];
 

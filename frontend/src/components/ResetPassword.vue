@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="text-4xl">Reset Your Password</h1>
+    <div class="min-w-full">
+        <h1 class="text-4xl font-semibold">Reset Your Password</h1>
 
         <p class="py-3">Enter and confirm your new password.</p>
 
@@ -24,7 +24,7 @@
         </form>
 
         <div v-if="error" class="error-message">
-            <p>Error resetting your password.</p>
+            <p class="font-bold py-3">Error resetting your password.</p>
         </div>
 
         <div class="flex flex-row flex-nowrap">
@@ -38,9 +38,6 @@
 
 <script>
 import axios from 'axios'
-//import VueRouter from "vue-router"
-
-//let token = localStorage.getItem("token")
 
 export default {
     name: 'ResetPassword',
