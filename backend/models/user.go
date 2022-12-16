@@ -23,15 +23,17 @@ type (
 	}
 
 	User struct {
-		ID         uint      `gorm:"column:id;primary_key" json:"id"`
-		Email      string    `gorm:"type:varchar(255);NOT_NULL" json:"email"`
-		FirstName  string    `gorm:"type:varchar(255)" sql:"default: null" json:"first_name"`
-		LastName   string    `gorm:"type:varchar(255)" sql:"default: null" json:"last_name"`
-		Password   string    `gorm:"type:varchar(255)" sql:"default: null" json:"password"`
-		Token      string    `gorm:"type:varchar(255)" sql:"default: null" json:"token"`
-		ResetToken string    `gorm:"type:varchar(255)" sql:"default: null" json:"reset_token"`
-		CreatedAt  time.Time `json:"created_at"`
-		UpdatedAt  time.Time `json:"updated_at"`
+		ID                uint      `gorm:"column:id;primary_key" json:"id"`
+		Email             string    `gorm:"type:varchar(255);NOT_NULL" json:"email"`
+		FirstName         string    `gorm:"type:varchar(255)" sql:"default: null" json:"first_name"`
+		LastName          string    `gorm:"type:varchar(255)" sql:"default: null" json:"last_name"`
+		Password          string    `gorm:"type:varchar(255)" sql:"default: null" json:"password"`
+		Token             string    `gorm:"type:varchar(255)" sql:"default: null" json:"token"`
+		ResetToken        string    `gorm:"type:varchar(255)" sql:"default: null" json:"reset_token"`
+		VerificationToken string    `gorm:"type:varchar(255)" sql:"default: null" json:"verification_token"`
+		Verified          bool      `gorm:"type:boolean" sql:"default: false" json:"verified"`
+		CreatedAt         time.Time `json:"created_at"`
+		UpdatedAt         time.Time `json:"updated_at"`
 	}
 )
 
@@ -127,14 +129,14 @@ func (user User) BuildJWT() (string, error) {
 	return token.SignedString([]byte(os.Getenv("APP_KEY")))
 }
 
-func (user User) BuildResetToken() (string, error) {
+func (user User) BuildHexToken() (string, error) {
 	// Generate slice of bytes
 	bin := make([]byte, 64)
 	_, err := rand.Read(bin)
 
 	// Encode as hexadecimal token
-	reset_token := hex.EncodeToString(bin)
-	return reset_token, err
+	hex_token := hex.EncodeToString(bin)
+	return hex_token, err
 }
 
 func (user *User) Update(newdata User) error {

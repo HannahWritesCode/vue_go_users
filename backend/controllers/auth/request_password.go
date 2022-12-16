@@ -51,7 +51,7 @@ func SendResetPasswordEmail(c *gin.Context) {
 	// c.JSON(http.StatusOK, tempPassword)
 
 	// Generate reset token
-	resetToken, err := user.BuildResetToken()
+	resetToken, err := user.BuildHexToken()
 	if err != nil {
 		panic(err)
 	}

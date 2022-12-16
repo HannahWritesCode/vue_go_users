@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"vue-go-users.com/helpers"
 	"vue-go-users.com/models"
+	"vue-go-users.com/services/mail"
 	"vue-go-users.com/utils"
 )
 
@@ -45,21 +45,41 @@ func Create(c *gin.Context) {
 		panic(err)
 	}
 
-	userPublic, err := helpers.ConvertStruct[models.UserPublic](user)
+	// Generate verification token
+	verificationToken, err := user.BuildHexToken()
 	if err != nil {
 		panic(err)
 	}
 
-	// build JWT
-	token, buildErr := user.BuildJWT()
-	if buildErr != nil {
-		panic(buildErr.Error())
+	// Update the user
+	newdata := models.User{
+		VerificationToken: verificationToken,
+	}
+	if err := user.Update(newdata); err != nil {
+		panic(err)
 	}
 
-	output := gin.H{
-		"token": token,
-		"user":  userPublic,
-	}
+	// userPublic, err := helpers.ConvertStruct[models.UserPublic](user)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	c.JSON(http.StatusCreated, output)
+	// // build JWT
+	// token, buildErr := user.BuildJWT()
+	// if buildErr != nil {
+	// 	panic(buildErr.Error())
+	// }
+
+	// output := gin.H{
+	// 	"token": token,
+	// 	"user":  userPublic,
+	// }
+
+	c.JSON(http.StatusOK, verificationToken)
+
+	// Send password reset email
+	sendEmailErr := mail.SendVerificationEmail(input.Email, verificationToken)
+	if sendEmailErr != nil {
+		panic(sendEmailErr)
+	}
 }

@@ -36,6 +36,9 @@ export default {
             axios({
                 method: "PUT",
                 url: "http://127.0.0.1:50009/api/v1/users",
+                data: {
+                    email: this.email,
+                },
                 headers: {
                     "content-type": "application/json",
                     "authorization": `Bearer ${this.token}`
