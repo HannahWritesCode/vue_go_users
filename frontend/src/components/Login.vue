@@ -22,8 +22,6 @@
                     value="Log In" id="submit-button" />
             </form>
 
-            <!-- <hr /> -->
-
             <div v-if="error">
                 <p class="font-bold py-3">Error logging in. <br />Check that the email and/or
                     password you entered are correct.</p>

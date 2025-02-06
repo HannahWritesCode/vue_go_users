@@ -1,0 +1,32 @@
+daemon off;
+worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
+
+events {
+  use epoll;
+  accept_mutex on;
+  worker_connections <%= ENV['NGINX_WORKER_CONNECTIONS'] || 1024 %>;
+}
+
+http {
+  server_tokens off;
+  gzip on;
+  gzip_comp_level 2;
+  gzip_min_length 512;
+
+  server {
+    listen <%= ENV['PORT'] %>;
+    server_name _;
+    root /root/frontend/dist;
+    index index.html;
+
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+      proxy_pass http://unix:/tmp/nginx.socket;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+  }
+}

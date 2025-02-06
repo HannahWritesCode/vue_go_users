@@ -39,11 +39,11 @@ const routes = [
     {
         path: "/delete-confirmation",
         component: DeleteConfirmation
-    },
-    {
-        path: "/verification/:verification_token",
-        component: Verification
     }
+    // {
+    //     path: "/verification/:verification_token",
+    //     component: Verification
+    // }
 ];
 
 const router = createRouter({

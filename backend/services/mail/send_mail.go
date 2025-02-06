@@ -24,10 +24,6 @@ func SendResetEmail(receiver string, reset_token string) error {
 	subject := "Reset Your Password"
 	body := fmt.Sprintf("Reset your password here: http://localhost:5173/reset-password/%s", reset_token)
 
-	// Message
-	//message := fmt.Sprintf("Reset your password here: http://localhost:5173/request-password/%s", reset_token)
-	//byteMessage := []byte(message)
-
 	// Build the message
 	message := fmt.Sprintf("From: %s\r\n", from)
 	message += fmt.Sprintf("To: %s\r\n", to)

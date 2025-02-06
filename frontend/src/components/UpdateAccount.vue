@@ -48,8 +48,7 @@
 
         <div v-else-if="response">
             <p class="font-bold py-3">Error updating your account. <br /> If you are updating your password, confirm it
-                by
-                typing it again in the "Confirm your password" field.</p>
+                by typing it again in the "Confirm your password" field.</p>
         </div>
 
         <router-link to="/success" class="font-semibold py-3 text-green-500 hover:underline">

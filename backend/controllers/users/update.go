@@ -41,7 +41,6 @@ func Update(c *gin.Context) {
 		Email:     input.Email,
 		FirstName: input.FirstName,
 		LastName:  input.LastName,
-		//ModuleIds: input.ModuleIds,
 	}
 	if input.Password != "" {
 		newdata.Password = input.Password

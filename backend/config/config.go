@@ -19,6 +19,7 @@ func Init(env string) {
 	config.AddConfigPath("./config")
 	config.AddConfigPath("../config")
 	config.AddConfigPath("../../config")
+	config.AddConfigPath("/app/backend/config")
 
 	err := config.ReadInConfig()
 	if err != nil {
