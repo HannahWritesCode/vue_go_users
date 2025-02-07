@@ -1,4 +1,4 @@
-FROM golang:1.18-alpine
+FROM golang:1.23-alpine
 
 RUN apk update
 RUN apk add --update --no-cache make alpine-sdk mysql-client bash git openssh wget
