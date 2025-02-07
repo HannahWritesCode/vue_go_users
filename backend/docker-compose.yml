@@ -38,8 +38,6 @@ services:
     image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
     volumes:
       - .:/app
-    env_file:
-      - .env
     links:
       - db
       - redis
