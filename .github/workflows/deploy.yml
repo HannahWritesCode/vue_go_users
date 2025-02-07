@@ -34,7 +34,7 @@ jobs:
       - name: List generated PVC files
         run: |
           echo "PVC files:"
-          find . -name '*-persistentvolumeclaim.yaml' -R
+          find . -name '*-persistentvolumeclaim.yaml'
 
       - name: Modify PVC files
         working-directory: ./backend
