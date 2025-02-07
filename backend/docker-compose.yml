@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   # Nginx
   web:
@@ -7,6 +5,7 @@ services:
     build:
       context: ./
       dockerfile: .docker/nginx/Dockerfile
+    image: registry.digitalocean.com/hannahwritescode-registry/users_web:latest
     volumes:
       - .:/app
     ports:
@@ -17,7 +16,7 @@ services:
   # Database
   db:
     container_name: users_db
-    image: mysql:5.7.24
+    image: registry.digitalocean.com/hannahwritescode-registry/mysql:5.7.24
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
@@ -34,6 +33,7 @@ services:
     build:
       context: .
       dockerfile: .docker/go/Dockerfile
+    image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
     volumes:
       - .:/app
     env_file:
@@ -45,5 +45,5 @@ services:
 
   # Redis
   redis:
-    image: redis:3.2.12
+    image: registry.digitalocean.com/hannahwritescode-registry/redis:3.2.12
     container_name: users_redis
