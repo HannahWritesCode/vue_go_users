@@ -8,6 +8,8 @@ services:
       context: ./
       dockerfile: .docker/nginx/Dockerfile
     image: registry.digitalocean.com/hannahwritescode-registry/users_web:latest
+    volumes:
+      - .:/app
     ports:
       - '50009:80'
     links:
@@ -21,6 +23,8 @@ services:
     restart: always
     ports:
       - '51009:3306'
+    volumes:
+      - ~/data/users_mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: local_mysql_password
     entrypoint: sh -c " echo 'CREATE DATABASE IF NOT EXISTS users; CREATE DATABASE IF NOT EXISTS test_users;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
@@ -34,6 +38,8 @@ services:
     image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
     ports:
       - '52009:8080'
+    volumes:
+      - .:/app
     links:
       - db
       - redis
