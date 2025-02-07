@@ -31,6 +31,14 @@ jobs:
         working-directory: ./backend
         run: kompose convert -f docker-compose.yml
 
+      - name: List generated files
+        working-directory: ./backend
+        run: |
+          echo "Generated files:"
+          ls -la
+          echo "PVC files:"
+          find . -name '*-persistentvolumeclaim.yaml'
+
       - name: Modify PVC files
         working-directory: ./backend
         run: |
