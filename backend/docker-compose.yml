@@ -36,6 +36,8 @@ services:
       context: .
       dockerfile: .docker/go/Dockerfile
     image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
+    ports:
+      - '52009:8080'
     volumes:
       - .:/app
     links:
@@ -46,4 +48,6 @@ services:
   # Redis
   redis:
     image: registry.digitalocean.com/hannahwritescode-registry/redis:3.2.12
+    ports:
+      - '53009:6379'
     container_name: users_redis
