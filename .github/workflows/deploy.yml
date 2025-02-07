@@ -37,4 +37,4 @@ jobs:
           done
 
       - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f $(ls *.yaml | grep -v docker-compose | tr '\n' ' ')
+        run: kubectl apply -f $(find . -name '*.yaml' ! -name 'docker-compose.yaml' -type f)
