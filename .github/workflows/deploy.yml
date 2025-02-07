@@ -8,29 +8,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install doctl
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-    - name: Install kubectl
-      uses: azure/setup-kubectl@v1
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v1
 
-    - name: Install Kompose
-      run: |
-        curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
-        chmod +x kompose
-        sudo mv ./kompose /usr/local/bin/kompose
+      - name: Install Kompose
+        run: |
+          curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
+          chmod +x kompose
+          sudo mv ./kompose /usr/local/bin/kompose
 
-    - name: Save DigitalOcean kubeconfig
-      run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
-    - name: Convert docker-compose to Kubernetes manifests
-      working-directory: ./backend
-      run: kompose convert -f docker-compose.yml
+      - name: Convert docker-compose to Kubernetes manifests
+        working-directory: ./backend
+        run: kompose convert -f docker-compose.yml
 
-    - name: Deploy to DigitalOcean Kubernetes
-      working-directory: ./backend
-      run: kubectl apply -f .
+      - name: Deploy to DigitalOcean Kubernetes
+        working-directory: ./backend
+        run: kubectl apply -f $(ls *.yaml | grep -v docker-compose)
