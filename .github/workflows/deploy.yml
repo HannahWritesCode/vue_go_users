@@ -12,7 +12,8 @@ jobs:
 
       - name: Deploy to DigitalOcean Kubernetes
         working-directory: ./backend/k8s-manifests
-        run: kubectl apply -f .
+        run: |
+          kubectl apply -f .
           kubectl get services -o wide
 
       - name: Get Node External IPs and Ports
