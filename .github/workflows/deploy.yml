@@ -10,42 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v1
-
-      - name: Install Kompose
-        run: |
-          curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
-          chmod +x kompose
-          sudo mv ./kompose /usr/local/bin/kompose
-
-      - name: Save DigitalOcean kubeconfig
-        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
-
-      - name: Convert docker-compose to Kubernetes manifests
-        working-directory: ./backend
-        run: |
-          mkdir -p kubernetes-manifests
-          kompose convert -f docker-compose.yml -o kubernetes-manifests
-
-      - name: Modify PVC files
-        working-directory: ./backend/kubernetes-manifests
-        run: |
-          for file in *-persistentvolumeclaim.yaml; do
-            sed -i 's/storageClassName: .*/storageClassName: do-block-storage/' "$file"
-          done
-
-      - name: Upload Kubernetes Manifests as Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: kubernetes-manifests
-          path: ./backend/kubernetes-manifests/
-
       - name: Deploy to DigitalOcean Kubernetes
-        working-directory: ./backend/kubernetes-manifests
+        working-directory: ./backend/k8s-manifests
         run: kubectl apply -f .
+          kubectl get services -o wide
+
+      - name: Get Node External IPs and Ports
+        run: |
+          echo "Node External IPs:"
+          kubectl get nodes -o wide
+          echo "Web Service Details:"
+          kubectl get svc web -o yaml

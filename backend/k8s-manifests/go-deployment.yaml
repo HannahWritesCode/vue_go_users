@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml -o kubernetes-manifests
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: go
+  name: go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: go
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml -o kubernetes-manifests
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: go
+    spec:
+      containers:
+        - args:
+            - go
+            - run
+            - ./main.go
+            - -e
+            - docker_development
+          image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
+          name: users-go
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /app
+              name: go-claim0
+      restartPolicy: Always
+      volumes:
+        - name: go-claim0
+          persistentVolumeClaim:
+            claimName: go-claim0
+status: {}
