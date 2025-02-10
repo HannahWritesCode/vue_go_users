@@ -40,6 +40,12 @@ jobs:
             sed -i 's/storageClassName: .*/storageClassName: do-block-storage/' "$file"
           done
 
+      - name: Upload Kubernetes Manifests as Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: kubernetes-manifests
+          path: ./backend/kubernetes-manifests/
+
       - name: Deploy to DigitalOcean Kubernetes
         working-directory: ./backend/kubernetes-manifests
         run: kubectl apply -f .
