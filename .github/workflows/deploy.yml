@@ -24,9 +24,7 @@ jobs:
           kubectl apply -f .
           kubectl get services -o wide
 
-      - name: Get Node External IPs and Ports
+      - name: Get Node External IP
         run: |
-          echo "Node External IPs:"
+          echo "Node External IP:"
           kubectl get nodes -o wide
-          echo "Web Service Details:"
-          kubectl get svc web -o yaml
