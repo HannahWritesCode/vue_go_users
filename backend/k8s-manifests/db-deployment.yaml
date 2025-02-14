@@ -30,12 +30,12 @@ spec:
           command:
             - sh
             - -c
-            - ' echo ''CREATE DATABASE IF NOT EXISTS users; CREATE DATABASE IF NOT EXISTS test_users;'' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci '
+            - " echo 'CREATE DATABASE IF NOT EXISTS users; CREATE DATABASE IF NOT EXISTS test_users;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: local_mysql_password
           image: registry.digitalocean.com/hannahwritescode-registry/mysql:5.7.24
-          name: users-db
+          name: mysql
           ports:
             - containerPort: 3306
           resources: {}
