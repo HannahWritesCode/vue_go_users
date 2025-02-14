@@ -33,14 +33,14 @@ jobs:
           mkdir -p k8s-manifests
           kompose convert -f docker-compose.yml -o k8s-manifests
 
-      - name: Modify PVC files and web-service.yml
+      - name: Modify PVC files and web-service.yaml
         working-directory: ./backend/k8s-manifests
         run: |
           for file in *-persistentvolumeclaim.yaml; do
             sed -i 's/storageClassName: .*/storageClassName: do-block-storage/' "$file"
           done
-          sed -i 's/type: ClusterIP/type: NodePort/' web-service.yaml
-          sed -i '/type: NodePort/a\  ports:\n    - port: 80\n      targetPort: 80\n      nodePort: 30009' web-service.yaml
+          sed -i '/type: ClusterIP/c\  type: NodePort' web-service.yaml
+          sed -i '/ports:/,/^[^ ]/c\  ports:\n    - port: 80\n      targetPort: 80\n      nodePort: 30009' web-service.yaml
 
       - name: Deploy to DigitalOcean Kubernetes
         working-directory: ./backend/k8s-manifests
