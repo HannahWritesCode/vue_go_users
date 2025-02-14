@@ -25,7 +25,7 @@ spec:
         io.kompose.service: web
     spec:
       containers:
-        - image: registry.digitalocean.com/hannahwritescode-registry/users_web:latest
+        - image: registry.digitalocean.com/hannahwritescode-registry/backend-web:latest
           name: backend-web
           ports:
             - containerPort: 80
