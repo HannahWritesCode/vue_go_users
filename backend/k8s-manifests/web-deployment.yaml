@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - image: registry.digitalocean.com/hannahwritescode-registry/users_web:latest
-          name: users-web
+          name: backend-web
           ports:
             - containerPort: 80
           resources: {}

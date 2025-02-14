@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - image: registry.digitalocean.com/hannahwritescode-registry/redis:3.2.12
-          name: users-redis
+          name: redis
           ports:
             - containerPort: 6379
           resources: {}
