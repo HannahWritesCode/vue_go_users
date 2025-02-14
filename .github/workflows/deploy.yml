@@ -36,7 +36,7 @@ jobs:
       - name: Check web-service.yaml content
         run: |
           echo "Before modification:"
-          cat web-service.yaml
+          cat k8s-manifests/web-service.yaml
 
       - name: Modify PVC files and web-service.yaml
         working-directory: ./backend/k8s-manifests
@@ -51,7 +51,7 @@ jobs:
       - name: Check web-service.yaml content
         run: |
           echo "After modification:"
-          cat web-service.yaml
+          cat k8s-manifests/web-service.yaml
 
       - name: Deploy to DigitalOcean Kubernetes
         working-directory: ./backend/k8s-manifests
