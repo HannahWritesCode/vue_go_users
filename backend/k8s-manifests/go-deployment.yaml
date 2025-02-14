@@ -31,7 +31,7 @@ spec:
             - ./main.go
             - -e
             - docker_development
-          image: registry.digitalocean.com/hannahwritescode-registry/users_go:latest
+          image: registry.digitalocean.com/hannahwritescode-registry/backend-go:latest
           name: backend-go
           ports:
             - containerPort: 8080
