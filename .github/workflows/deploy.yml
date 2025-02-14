@@ -33,6 +33,12 @@ jobs:
           mkdir -p k8s-manifests
           kompose convert -f docker-compose.yml -o k8s-manifests
 
+      - name: List k8s-manifests directory
+        run: ls -la k8s-manifests/
+
+      - name: Print working directory
+        run: pwd
+
       - name: Check web-service.yaml content
         run: |
           echo "Before modification:"
@@ -47,6 +53,9 @@ jobs:
           sed -i '/type: ClusterIP/c\  type: NodePort' web-service.yaml
           sed -i '/ports:/,/^[^ ]/c\  ports:\n    - port: 80\n      targetPort: 80\n      nodePort: 30009' web-service.yaml
           sed -i '/loadBalancer/d' web-service.yaml
+
+      - name: Print working directory
+        run: pwd
 
       - name: Check web-service.yaml content
         run: |
